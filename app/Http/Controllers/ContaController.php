@@ -73,17 +73,19 @@ class ContaController extends Controller
         }
     }
 
-    public function update(ContaRequest $request, $id)
+    public function update(Request $request, $id)
     {
         try {
-            $isUpdated = $this->contaService->update($request->validated(), $id, $this->user);
+            $isUpdated = $this->contaService->update($request->all(), $id, $this->user);
 
             if(!$isUpdated) {
                 throw new Exception("Houve um erro.");
             }
+            $contaUpdated = $this->contaService->getOne($id, $this->user);
 
             return response()->json([
-                'updated' => true
+                'updated' => true,
+                'conta' => $contaUpdated
             ]);
         } catch (Exception $e) {
             //TO DO

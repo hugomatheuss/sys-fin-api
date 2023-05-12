@@ -5,13 +5,10 @@ namespace App\Http\Controllers;
 use App\Http\Requests\UserRequest;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Hash;
-use App\Models\User;
 use App\Services\UserService;
 use Exception;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Tymon\JWTAuth\Exceptions\JWTException;
-use Tymon\JWTAuth\Facades\JWTAuth;
 use Symfony\Component\HttpFoundation\Response;
 
 class AuthController extends Controller
@@ -29,13 +26,13 @@ class AuthController extends Controller
                 'email' => 'required|string|email',
                 'password' => 'required|string',
             ]);
-    
+            
             $credentials = $request->only('email', 'password');
     
             $token = auth()->attempt($credentials);
     
             if (!$token) {
-                return response()->json(['error' => 'Unauthorized'], 401);
+                return response()->json(['error' => 'Unauthorized', "code" => 401], 401);
             }
             
             return $this->respondWithToken($token);
@@ -48,7 +45,6 @@ class AuthController extends Controller
     {
         try {
             $data = $request->validated();
-
             $user = $this->userService->create($data);
 
             $token = Auth::login($user);
