@@ -31,6 +31,7 @@ class ContaRepository {
         $numeroDocumento = $fields['numDocumento'] ?? null;
         $fornecedor = $fields['fornecedor'] ?? null;
         $valor = $fields['valor'] ?? null;
+        $status = $fields['status'] ?? null;
         $dataInicial = $fields['dataInicial'] ?? null;
         $dataFinal = $fields['dataFinal'] ?? null;
 
@@ -46,6 +47,10 @@ class ContaRepository {
 
         if (!is_null($valor)) {
             $contas = $contas->where('valor', $valor);
+        }
+
+        if (!is_null($status)) {
+            $contas = $contas->where('status', $status);
         }
 
         if (!is_null($dataInicial) && !is_null($dataFinal)) {
