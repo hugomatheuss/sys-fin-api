@@ -23,11 +23,11 @@ class AuthController extends Controller
     {
         try {
             $request->validate([
-                'email' => 'required|string|email',
+                'cnpj' => 'required|string|max:14|min:14',
                 'password' => 'required|string',
             ]);
             
-            $credentials = $request->only('email', 'password');
+            $credentials = $request->only('cnpj', 'password');
     
             $token = auth()->attempt($credentials);
     
