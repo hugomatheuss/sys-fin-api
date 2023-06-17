@@ -25,10 +25,10 @@ class ContaRequest extends FormRequest
             'fornecedor' => 'required|string|',
             'valor' => 'required',
             'tipo' => 'required',
-            'descricao' => 'string',
+            'descricao' => 'nullable',
             'status' => 'required',
-            'numeroDocumento' => 'required',
-            'dataPagamento' => 'string',
+            'numeroDocumento' => 'nullable',
+            'dataPagamento' => 'nullable',
             'dataVencimento' => 'required'
         ];
     }
