@@ -1,0 +1,4 @@
+deployment:
+tasks:
+- export DEPLOYPATH=/home1/sysfin62/app
+- /bin/cp -r * $DEPLOYPATH
