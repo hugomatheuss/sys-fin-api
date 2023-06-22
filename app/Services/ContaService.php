@@ -2,6 +2,7 @@
 
 namespace App\Services;
 
+use App\Builders\ContaBuilder;
 use App\Models\Conta;
 use App\Models\User;
 use App\Repositories\ContaRepository;
@@ -10,10 +11,12 @@ use Illuminate\Database\Eloquent\Collection;
 class ContaService {
 
     protected $repository;
+    protected $builder;
 
-    public function __construct(ContaRepository $contaRepository)
+    public function __construct(ContaRepository $contaRepository, ContaBuilder $contaBuilder)
     {
         $this->repository = $contaRepository;
+        $this->builder = $contaBuilder;
     }
 
     public function getAll(User $user): Collection
@@ -33,6 +36,7 @@ class ContaService {
 
     public function create(array $data, User $user): Conta
     {
+        $data = $this->builder->build($data);
         return $this->repository->create($data, $user);
     }
 
