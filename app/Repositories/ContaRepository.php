@@ -90,4 +90,12 @@ class ContaRepository {
         }
         return $this->entity->delete();
     }
+
+    public function pagar(Conta $conta, User $user): bool
+    {
+        $this->entity = $conta;
+        $this->entity->status = '1';
+
+        return $this->entity->update($this->entity->toArray());
+    }
 }

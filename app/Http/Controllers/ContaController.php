@@ -11,7 +11,10 @@ use Illuminate\Http\Request;
 
 class ContaController extends Controller
 {
-    public function __construct(protected ContaService $contaService, protected User $user)
+    public function __construct(
+        protected ContaService $contaService,
+        protected User $user
+    )
     {
         $this->contaService = $contaService;
         $this->user = auth()->user();
@@ -89,6 +92,21 @@ class ContaController extends Controller
             ]);
         } catch (Exception $e) {
             //TO DO
+        }
+    }
+
+    public function pagar($id)
+    {
+        try {
+            $this->contaService->pagarConta($id, $this->user);
+            $contaPaga = $this->contaService->getOne($id, $this->user);
+            
+            return response()->json([
+                'pago' => true,
+                'conta' => $contaPaga
+            ]);
+        } catch (Exception $e) {
+            throw $e->getMessage();
         }
     }
 
