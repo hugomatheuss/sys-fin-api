@@ -51,6 +51,11 @@ class User extends Authenticatable implements JWTSubject
         return $this->hasMany(Conta::class);
     }
 
+    public function lancamentos(): HasMany
+    {
+        return $this->hasMany(Lancamento::class);
+    }
+
     public function getJWTIdentifier()
     {
         return $this->getKey();

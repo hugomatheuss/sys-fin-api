@@ -2,8 +2,7 @@
 
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\ContaController;
-use App\Http\Controllers\UserController;
-use Illuminate\Http\Request;
+use App\Http\Controllers\LancamentoController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -36,4 +35,7 @@ Route::group([
     Route::put('/contas/{conta}', [ContaController::class, 'update']);
     Route::get('/contas/pagar/{conta}', [ContaController::class, 'pagar']);
     Route::delete('/contas/{conta}', [ContaController::class, 'destroy']);
+
+    Route::get('/lancamentos', [LancamentoController::class, 'index']);
+    Route::post('/lancamentos', [LancamentoController::class, 'store']);
 });
