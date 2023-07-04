@@ -66,6 +66,6 @@ class ContaService {
             throw new Exception('Conta já está paga.');
         }
 
-        return $this->repository->pagar($conta, $user);
+        return $this->repository->pagar($conta);
     }
 }

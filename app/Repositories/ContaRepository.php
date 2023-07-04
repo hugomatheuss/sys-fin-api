@@ -11,6 +11,8 @@ class ContaRepository {
     
     protected $entity;
 
+    public const PAGO = '1';
+
     public function __construct(Conta $conta)
     {
         $this->entity = $conta;
@@ -91,10 +93,10 @@ class ContaRepository {
         return $this->entity->delete();
     }
 
-    public function pagar(Conta $conta, User $user): bool
+    public function pagar(Conta $conta): bool
     {
         $this->entity = $conta;
-        $this->entity->status = '1';
+        $this->entity->status = self::PAGO;
 
         return $this->entity->update($this->entity->toArray());
     }
