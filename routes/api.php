@@ -37,5 +37,6 @@ Route::group([
     Route::delete('/contas/{conta}', [ContaController::class, 'destroy']);
 
     Route::get('/lancamentos', [LancamentoController::class, 'index']);
+    Route::get('/lancamentos/diarios', [LancamentoController::class, 'diarios']);
     Route::post('/lancamentos', [LancamentoController::class, 'store']);
 });
