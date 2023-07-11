@@ -80,8 +80,8 @@ class LancamentoService {
                 } else {
                     $count = $count +1;
                     $prevDate = date_format(date_create($item['created_at']), 'Y-m-d');
-                    $recebimento = $recebimento + $item['recebimento'];
-                    $pagamento = $pagamento + $item['pagamento'];
+                    $recebimento = $item['recebimento'];
+                    $pagamento = $item['pagamento'];
                 }
             }
         }
