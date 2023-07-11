@@ -4,7 +4,7 @@ namespace App\Repositories;
 
 use App\Models\Conta;
 use App\Models\User;
-use Carbon\Carbon;
+use DateTime;
 use Illuminate\Database\Eloquent\Collection;
 
 class ContaRepository {
@@ -95,7 +95,9 @@ class ContaRepository {
 
     public function pagar(Conta $conta): bool
     {
+        $today = new DateTime();
         $this->entity = $conta;
+        $this->entity->dataPagamento = $today->format('d-m-Y');
         $this->entity->status = self::PAGO;
 
         return $this->entity->update($this->entity->toArray());
