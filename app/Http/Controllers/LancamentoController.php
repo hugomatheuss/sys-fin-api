@@ -46,14 +46,4 @@ class LancamentoController extends Controller
             //TO DO
         }
     }
-
-    public function diarios()
-    {
-        try {
-            $lancamentosDiarios = $this->lancamentoService->lancamentosDiarios($this->user);
-            return $lancamentosDiarios;
-        } catch (Exception $e) {
-            //TO DO
-        }
-    }
 }

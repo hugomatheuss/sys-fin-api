@@ -48,44 +48,4 @@ class LancamentoService {
     {
         return $this->repository->delete($id, $user);
     }
-
-    public function lancamentosDiarios(User $user): array
-    {
-        $lancamentos = $this->repository->getAll($user);
-
-        $lancamentos = $this->getAll($user);
-        $lancamentosDiarios = [];
-        $recebimento = 0;
-        $pagamento = 0;
-        $count = 0;
-        
-        foreach($lancamentos as $key => $item) {
-            if ($key == 0) {
-                $prevDate = date_format(date_create($item['created_at']), 'Y-m-d');
-                $recebimento = $recebimento + $item['recebimento'];
-                $pagamento = $pagamento + $item['pagamento'];
-            }
-
-            if ($key !== 0) {
-                if ($prevDate == date_format(date_create($item['created_at']), 'Y-m-d')) {
-                    $prevDate = date_format(date_create($item['created_at']), 'Y-m-d');
-                    $recebimento = $recebimento + $item['recebimento'];
-                    $pagamento = $pagamento + $item['pagamento'];
-
-                    $lancamentosDiarios[$count] = [
-                        'dataLancamento' => $prevDate,
-                        'recebimentoTotal' => $recebimento,
-                        'pagamentoTotal' => $pagamento,
-                    ];
-                } else {
-                    $count = $count +1;
-                    $prevDate = date_format(date_create($item['created_at']), 'Y-m-d');
-                    $recebimento = $item['recebimento'];
-                    $pagamento = $item['pagamento'];
-                }
-            }
-        }
-
-        return $lancamentosDiarios;
-    }
 }
