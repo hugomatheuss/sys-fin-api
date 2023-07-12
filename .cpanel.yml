@@ -1,6 +1,6 @@
 ---
 deployment:
  tasks:
- - export DEPLOYPATH=/home1/sysfin62/app.sysfinan.com
+ - export DEPLOYPATH=/home1/sysfin62/repositories/sys-fin-api
  - /bin/cp index.html $DEPLOYPATH
  - /bin/cp style.css $DEPLOYPATH
